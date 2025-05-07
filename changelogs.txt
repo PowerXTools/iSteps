@@ -1,0 +1,101 @@
+C0.5.4， 2025-05-07
+1) 将get_device_capacity()等用模板来实现:
+template<class T> void get_item_capacity(std::vector<T>& item);
+2) 删除了get_***_capcity()13个函数
+//        size_t get_bus_capacity() const;
+//        size_t get_generator_capacity() const;
+//        size_t get_wt_generator_capacity() const;
+//        size_t get_pv_unit_capacity() const;
+//        size_t get_load_capacity() const;
+//        size_t get_fixed_shunt_capacity() const;
+//        size_t get_ac_line_capacity() const;
+//        size_t get_transformer_capacity() const;
+//        size_t get_2t_lcc_hvdc_capacity() const;
+//        size_t get_vsc_hvdc_capacity() const;
+//        size_t get_equivalent_device_capacity() const;
+//        size_t get_energy_storage_capacity() const;
+//        size_t get_lcc_hvdc_capacity() const;
+
+C0.5.3， 2025-05-06
+1) 将Bus.check()等用模板来实现:
+template<class T> void check_all_items(std::vector<T>& item);
+2) 模板要求不能是抽象类，也即不能有未实现的虚函数；故对部分基类的虚函数进行了{}化；可能有隐患；
+3）对应删除了系列相关函数：
+        void check_all_devices();
+        void check_all_buses();
+        void check_all_sources();
+        void check_all_generators();
+        void check_all_wt_generators();
+        void check_all_pv_units();
+        void check_all_loads();
+        void check_all_fixed_shunts();
+        void check_all_ac_lines();
+        void check_all_transformers();
+        void check_all_2t_lcc_hvdcs();
+        void check_all_vsc_hvdcs();
+        void check_all_equivalent_devices();
+        void check_all_energy_storages();
+        void check_all_lcc_hvdcs();
+        void check_all_areas();
+        void check_all_zones();
+        void check_all_owners();
+
+C0.5.2， 2025-05-04
+1) 将rapidjson替换为改为nlohmann/json,只有两个头文件，使用语法更简单；
+2) 几个enabled，disabled_***_logic()改为set_***(bool),一个函数实现两个函数作用，并把_logic去掉了。
+3) STEPS更换为iSTEPS；
+4) 将配置文件isteps_config.json作为默认值，可通过变量传入。
+
+C0.5.1， 2025-05-03
+1) 改为C++20编译设置；
+2）osstream的输出，改为C++20支持的 std::format(""),简化了代码；
+3）get_bus_complex_voltage_in_pu_with_internal_num(),改为get_bus_voltage_in_pu();
+函数名原则上不超过5个单词
+
+C0.5.0， 2025-05-01
+1) 去除了4个左右此前不编译的cpp文件；
+2）将model/energy_storage_model下的子目录内文件提一级整合；
+3）形成了cmakelists.txt，并调试成功。
+
+存疑：header/model/energy_storage_model下，几个*s.h头文件内部没有实质性内容
+是否可以删除待验证
+
+C0.4.4.3， 2025-04-30
+1)  添加了main_test.h,main_test.cpp, main.cpp
+main.cpp中调用几个场景的测试函数
+这些测试函数是整体功能性测试，非单元测试
+
+C0.4.4， 2025-04-29
+1)  将STEP的重要变量名称做了简化：
+    PF_DATA pf_data;
+    DYN_DATA dyn_data;
+    PF_SOLVER pf_solver;
+    SC_SOLVER sc_solver;
+    DYN_SIMULATOR dyn_simulator;
+    NET_MATRIX network;
+2） 将toolkit的目录结构简化，其下子目录取消，文件都放在toolkit目录下；
+3）几个重要类中有clear（）函数；改为clear_all_data(), dyn_simulator改为reset_data().
+
+C0.4， 2025-04-28
+1) 将STEP的重要变量改为public，避免频繁获取toolkit再从外部调用其内部变量的函数；
+2） power_flow_solver改为 pf_solver，network_matrix改为network。
+
+C0.3， 2025-04-26
+1) 移除了变量STEPS_DEVICE_TYPE_LIST、STEPS_DC_DEVICE_TYPE_LIST；
+2) 将importer、exporter当做STEPS的一个成员，也即数据和操作在意对象里面，而不是通过取引用对其进行操作、修改；
+3) toolkit.get_power_system_database()改为：get_database();
+4) POWER_SYSTEM_DATABASE改为DATABASE；
+5) POWERFLOW_SOLVER改为PF_SOLVER。
+6) class STRING_INT_MAP 改为 StringIntMap, string_int_map头和实现文件，并按C++14标准进行了规范；
+7) STEPS_MAX_TOOLKIT_SIZE 简化为：MAX_TOOLKIT_SIZE；
+8) 字符串格式化中， 类似（“%u”， var），如果var为size_t，则有隐患；改为（“%zu”， var）
+
+
+C0.2， 2025-04-24
+1) 主程序移除了所有测试代码*_test.h, *_test.cpp，节省构建时间，减少lib库；
+2) 为应用示例main_*.cpp建立单独工程demos;
+
+C0.1， 2025-04-23
+1) 将thirdparty三个库的输出为libdepend;
+2) 将libsteps输出为bin;
+3) 建立了一个workspace，并设置相关依赖。

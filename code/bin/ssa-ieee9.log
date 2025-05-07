@@ -1,0 +1,115 @@
+[TK DFLT][2025-04-30 11:14:07][   0.004] Loading powerflow data from PSS/E file: ../cases/39_bus/IEEE39.raw
+[TK DFLT][2025-04-30 11:14:07][   0.014] Loading powerflow data from PSS/E file: ../cases/39_bus/IEEE39.rawDone loading powerflow data.
+[TK DFLT][2025-04-30 11:14:07][   0.014] Loading powerflow data from PSS/E file: ../cases/39_bus/IEEE39.rawDone loading powerflow data.System maximum bus number is 105 of VSC-BUS-103
+[TK DFLT][2025-04-30 11:14:07][   0.014] Loading powerflow data from PSS/E file: ../cases/39_bus/IEEE39.rawDone loading powerflow data.System maximum bus number is 105 of VSC-BUS-103There are totally:
+[TK DFLT][2025-04-30 11:14:07][   0.014] + 44 buses
+[TK DFLT][2025-04-30 11:14:07][   0.014] + 11 generators
+[TK DFLT][2025-04-30 11:14:07][   0.014] + 0 WT generators
+[TK DFLT][2025-04-30 11:14:07][   0.014] + 0 PV units
+[TK DFLT][2025-04-30 11:14:07][   0.014] + 0 energy storages
+[TK DFLT][2025-04-30 11:14:07][   0.014] + 34 lines
+[TK DFLT][2025-04-30 11:14:07][   0.014] + 15 transformers
+[TK DFLT][2025-04-30 11:14:07][   0.014] + 2 fixed shunts
+[TK DFLT][2025-04-30 11:14:07][   0.014] + 0 2T LCC HVDCs
+[TK DFLT][2025-04-30 11:14:07][   0.014] + 0 VSC HVDCs
+[TK DFLT][2025-04-30 11:14:07][   0.014] + 21 loads
+[TK DFLT][2025-04-30 11:14:07][   0.014] + 1 areas
+[TK DFLT][2025-04-30 11:14:07][   0.014] + 0 zones
+[TK DFLT][2025-04-30 11:14:07][   0.014] + 0 owners
+[TK DFLT][2025-04-30 11:14:07][   0.014] Start solve powerflow with Full Newton Raphson solution.
+[TK DFLT][2025-04-30 11:14:07][   0.014] Initializing powerflow solver.
+[TK DFLT][2025-04-30 11:14:07][   0.014] Configuration of powerflow solver:
+[TK DFLT][2025-04-30 11:14:07][   0.014] + Fast sin/cos/tan functions: Disabled
+[TK DFLT][2025-04-30 11:14:07][   0.014] + Maximum iteration: 30
+[TK DFLT][2025-04-30 11:14:07][   0.014] + Iteration accelerator: 1
+[TK DFLT][2025-04-30 11:14:07][   0.014] + Allowed maximum P mismatch: 1e-05 MW
+[TK DFLT][2025-04-30 11:14:07][   0.014] + Allowed maximum Q mismatch: 1e-05MVar
+[TK DFLT][2025-04-30 11:14:07][   0.014] + Maximum voltage change: 999 pu
+[TK DFLT][2025-04-30 11:14:07][   0.014] + Maximum angle change: 999 deg (17.4358 rad)
+[TK DFLT][2025-04-30 11:14:07][   0.014] + Flat start: Disabled
+[TK DFLT][2025-04-30 11:14:07][   0.014] + Transformer tap adjustment: Enabled
+[TK DFLT][2025-04-30 11:14:07][   0.014] + Non-divergent solution: Enabled
+[TK DFLT][2025-04-30 11:14:07][   0.014] + Var limit check: Enabled
+[TK DFLT][2025-04-30 11:14:07][   0.014] + Network ordering optimization: 1
+[TK DFLT][2025-04-30 11:14:07][   0.014] + Export jacobian matrix step by step: Disabled
+[TK DFLT][2025-04-30 11:14:07][   0.014] Initial bus voltage and angle are listed as follows.
+[TK DFLT][2025-04-30 11:14:07][   0.014] bus      voltage(pu) angle(deg)
+[TK DFLT][2025-04-30 11:14:07][   0.014] 1   1.047540  -9.570700
+[TK DFLT][2025-04-30 11:14:07][   0.014] 2   1.048960  -7.011100
+[TK DFLT][2025-04-30 11:14:07][   0.014] 3   1.030420  -9.858100
+[TK DFLT][2025-04-30 11:14:07][   0.014] 4   1.003810 -10.654600
+[TK DFLT][2025-04-30 11:14:07][   0.014] 5   1.005020  -9.468700
+[TK DFLT][2025-04-30 11:14:07][   0.014] 6   1.007360  -8.766800
+[TK DFLT][2025-04-30 11:14:07][   0.014] 7   0.996700 -10.970200
+[TK DFLT][2025-04-30 11:14:07][   0.014] 8   0.995730 -11.476200
+[TK DFLT][2025-04-30 11:14:07][   0.014] 9   1.028090 -11.299700
+[TK DFLT][2025-04-30 11:14:07][   0.014] 10   1.017020  -6.381600
+[TK DFLT][2025-04-30 11:14:07][   0.015] 11   1.012530  -7.195200
+[TK DFLT][2025-04-30 11:14:07][   0.015] 12   1.000000  -7.210600
+[TK DFLT][2025-04-30 11:14:07][   0.015] 13   1.014190  -7.095900
+[TK DFLT][2025-04-30 11:14:07][   0.015] 14   1.011730  -8.764800
+[TK DFLT][2025-04-30 11:14:07][   0.015] 15   1.015780  -9.180700
+[TK DFLT][2025-04-30 11:14:07][   0.015] 16   1.032250  -7.776600
+[TK DFLT][2025-04-30 11:14:07][   0.015] 17   1.033950  -8.774800
+[TK DFLT][2025-04-30 11:14:07][   0.015] 18   1.031300  -9.615600
+[TK DFLT][2025-04-30 11:14:07][   0.015] 19   1.050010  -3.152500
+[TK DFLT][2025-04-30 11:14:07][   0.015] 20   0.990960  -4.563900
+[TK DFLT][2025-04-30 11:14:07][   0.015] 21   1.032100  -5.371000
+[TK DFLT][2025-04-30 11:14:07][   0.015] 22   1.049980  -0.923900
+[TK DFLT][2025-04-30 11:14:07][   0.015] 23   1.044980  -1.122100
+[TK DFLT][2025-04-30 11:14:07][   0.015] 24   1.037750  -7.657000
+[TK DFLT][2025-04-30 11:14:07][   0.015] 25   1.057520  -5.649300
+[TK DFLT][2025-04-30 11:14:07][   0.015] 26   1.052160  -6.905800
+[TK DFLT][2025-04-30 11:14:07][   0.015] 27   1.037950  -8.917300
+[TK DFLT][2025-04-30 11:14:07][   0.015] 28   1.050160  -3.394200
+[TK DFLT][2025-04-30 11:14:07][   0.015] 29   1.049970  -0.635100
+[TK DFLT][2025-04-30 11:14:07][   0.015] 30   1.047500  -4.591800
+[TK DFLT][2025-04-30 11:14:07][   0.015] 31   0.982000   0.000000
+[TK DFLT][2025-04-30 11:14:07][   0.015] 32   0.983100   1.615500
+[TK DFLT][2025-04-30 11:14:07][   0.015] 33   0.997200   2.064700
+[TK DFLT][2025-04-30 11:14:07][   0.015] 34   1.012300   0.626300
+[TK DFLT][2025-04-30 11:14:07][   0.015] 35   1.049300   4.037000
+[TK DFLT][2025-04-30 11:14:07][   0.015] 36   1.063500   6.729500
+[TK DFLT][2025-04-30 11:14:07][   0.015] 37   1.027800   1.135500
+[TK DFLT][2025-04-30 11:14:07][   0.015] 38   1.026500   6.428200
+[TK DFLT][2025-04-30 11:14:07][   0.015] 39   1.030000 -11.108300
+[TK DFLT][2025-04-30 11:14:07][   0.015] 101   1.000000   0.000000
+[TK DFLT][2025-04-30 11:14:07][   0.015] 102   1.000000   0.000000
+[TK DFLT][2025-04-30 11:14:07][   0.015] 103   1.000000   0.000000
+[TK DFLT][2025-04-30 11:14:07][   0.015] 104   1.000000   0.000000
+[TK DFLT][2025-04-30 11:14:07][   0.015] 105   1.000000   0.000000
+[TK DFLT][2025-04-30 11:14:07][   0.015] Network internal bus numbers are optimized.
+[TK DFLT][2025-04-30 11:14:07][   0.015] Done initializing powerflow solver.
+[TK DFLT][2025-04-30 11:14:07][   0.015] Updating powerflow P equation buses and Q equation buses.
+[TK DFLT][2025-04-30 11:14:07][   0.015] Done updating powerflow P equation buses and Q equation buses.
+[TK DFLT][2025-04-30 11:14:07][   0.016] Done building separate jacobian matrix.
+[TK DFLT][2025-04-30 11:14:07][   0.016] Iteration 0:
+[TK DFLT][2025-04-30 11:14:07][   0.016] Maximum   active power mismatch found: 416.911474 MW   at bus 14 [BUS-14].
+[TK DFLT][2025-04-30 11:14:07][   0.016] Maximum reactive power mismatch found:  48.101123 MVar at bus 4 [BUS-4].
+[TK DFLT][2025-04-30 11:14:07][   0.017] ALERT!  LU factorization for sparse matrix(CSparse) failed! (line 508 in file D:\BaiduSyncdisk\steps-master-C0.4.4\steps-master\code\steps\source\basic\sparse_matrix_csparse.cpp)
+[TK DFLT][2025-04-30 11:14:07][   0.017] No further powerflow solution will be attempted since LU factorization of N-R Jacobian matrix is failed.
+[TK DFLT][2025-04-30 11:14:07][   0.021] Done building separate jacobian matrix.
+[TK DFLT][2025-04-30 11:14:07][   0.025] Loading dynamic data from PSS/E file: IEEE9_ssa.dyr
+[TK DFLT][2025-04-30 11:14:07][   0.025] PSS/E dyr file 'IEEE9_ssa.dyr' is not accessible. Loading PSS/E dyr data is failed.
+[TK DFLT][2025-04-30 11:14:07][   0.025] Loading dynamic data from PSS/E file: IEEE9_ssa.dyrDone loading dynamic data.
+[TK DFLT][2025-04-30 11:14:07][   0.025] System dynamic simulation time step is set as :0.001 s.
+[TK DFLT][2025-04-30 11:14:07][   0.025] Configuration of dynamic simulator:
+[TK DFLT][2025-04-30 11:14:07][   0.025] + Fast sin/cos/tan function: Disabled
+[TK DFLT][2025-04-30 11:14:07][   0.025] + Time step: 0.001 s
+[TK DFLT][2025-04-30 11:14:07][   0.025] + Allowed maximum power imbalance: 1e-05 MVA
+[TK DFLT][2025-04-30 11:14:07][   0.025] + Maximum iteration for DAE solution: 3
+[TK DFLT][2025-04-30 11:14:07][   0.025] + Minimum iteration for DAE solution: 3
+[TK DFLT][2025-04-30 11:14:07][   0.025] + Maximum iteration for network: 50
+[TK DFLT][2025-04-30 11:14:07][   0.025] + Maximum iteration for updating: 10
+[TK DFLT][2025-04-30 11:14:07][   0.025] + Maximum iteration for event updating: 10
+[TK DFLT][2025-04-30 11:14:07][   0.025] + Maximum network solution divergent threshold: 3
+[TK DFLT][2025-04-30 11:14:07][   0.025] + Network solution accelerator: 0.8
+[TK DFLT][2025-04-30 11:14:07][   0.025] + Rotor angle stability surveillance: Disabled
+[TK DFLT][2025-04-30 11:14:07][   0.025] + Rotor angle stability threshold: 360 deg
+[TK DFLT][2025-04-30 11:14:07][   0.025] + Time step threshold when leading part of bus frequency model is enabled: 0.1 s
+[TK DFLT][2025-04-30 11:14:07][   0.025] + K for leading part of bus frequency model: 3
+[TK DFLT][2025-04-30 11:14:07][   0.025] + CSV export: Enabled
+[TK DFLT][2025-04-30 11:14:07][   0.025] + BIN export: Disabled
+[TK DFLT][2025-04-30 11:14:07][   0.025] + JSON export: Disabled
+[TK DFLT][2025-04-30 11:14:07][   0.025] + Output file name:
+[TK DFLT][2025-04-30 11:14:07][   0.025] + Channel count: 0

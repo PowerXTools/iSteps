@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="demos" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="../bin/demos" prefix_auto="1" extension_auto="1" />
+				<Option object_output="../../build/demos/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-std=gnu++14" />
+					<Add option="-g" />
+					<Add directory="../../code" />
+					<Add directory="../demos" />
+					<Add directory="../steps" />
+					<Add directory="../bin" />
+					<Add directory="../thirdparty/cpptest" />
+					<Add directory="../thirdparty/SuiteSparse/CXSparse/Include" />
+					<Add directory="../thirdparty/SuiteSparse/CSparse/Include" />
+					<Add directory="../thirdparty/SuiteSparse/SuiteSparse_config" />
+				</Compiler>
+				<Linker>
+					<Add option="-fopenmp" />
+					<Add library="../bin/libisteps.a" />
+					<Add library="../libdepend/libCpptest.a" />
+					<Add library="../libdepend/libCSparse.a" />
+					<Add library="../libdepend/libCXSparse.a" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="../bin/demos" prefix_auto="1" extension_auto="1" />
+				<Option object_output="../../build/demos/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-std=gnu++14" />
+					<Add directory="../../code" />
+					<Add directory="../demos" />
+					<Add directory="../steps" />
+					<Add directory="../bin" />
+					<Add directory="../thirdparty/cpptest" />
+					<Add directory="../thirdparty/SuiteSparse/CXSparse/Include" />
+					<Add directory="../thirdparty/SuiteSparse/CSparse/Include" />
+					<Add directory="../thirdparty/SuiteSparse/SuiteSparse_config" />
+				</Compiler>
+				<Linker>
+					<Add option="-static-libstdc++" />
+					<Add option="-static-libgcc" />
+					<Add option="-static" />
+					<Add option="-fopenmp" />
+					<Add library="../bin/libisteps.a" />
+					<Add library="../libdepend/libCpptest.a" />
+					<Add library="../libdepend/libCSparse.a" />
+					<Add library="../libdepend/libCXSparse.a" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="main_powerflow.cpp" />
+		<Extensions>
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

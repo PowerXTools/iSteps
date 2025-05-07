@@ -1,0 +1,309 @@
+#include "header/block/integral_block.h"
+#include "header/basic/utility.h"
+#include "header/steps_namespace.h"
+#include <istream>
+#include <iostream>
+
+using namespace std;
+
+INTEGRAL_BLOCK::INTEGRAL_BLOCK(iSTEPS& toolkit) : BLOCK(toolkit)
+{
+    set_T_in_s(999.0);
+}
+
+INTEGRAL_BLOCK::~INTEGRAL_BLOCK()
+{
+    ;
+}
+
+void INTEGRAL_BLOCK::set_T_in_s(double t)
+{
+    this->T = t;
+}
+
+double INTEGRAL_BLOCK::get_T_in_s() const
+{
+    return T;
+}
+
+
+void INTEGRAL_BLOCK::initialize()
+{
+    ostringstream osstream;
+
+    double t = get_T_in_s();
+    double y = get_output();
+
+    if(fabs(t)>DOUBLE_EPSILON and fabs(t-INFINITE_THRESHOLD)>DOUBLE_EPSILON)
+    {
+        iSTEPS& toolkit = get_toolkit();
+        double h = toolkit.get_dynamic_simulation_time_step_in_s();
+
+        one_over_t = 1.0/t;
+        h_over_t = h*one_over_t;
+
+        double s = y;
+        double x = 0.0;
+        //double z = s+0.5*h/t*x;
+        double z = s+0.5*h_over_t*x;
+
+        set_state(s);
+        set_store(z);
+        set_input(x);
+
+        if(get_limiter_type() != NO_LIMITER)
+        {
+            double vmax = get_upper_limit();
+            double vmin = get_lower_limit();
+            if(s>vmax)
+            {
+                osstream<<"Initialization Error. State ("<<s<<") exceeds upper limit bound ("<<vmax<<").";
+                toolkit.show_information(osstream);
+            }
+            if(s<vmin)
+            {
+                osstream<<"Initialization Error. State ("<<s<<") exceeds lower limit bound ("<<vmin<<").";
+                toolkit.show_information(osstream);
+            }
+        }
+    }
+    else
+    {
+        set_state(y);
+        set_store(0.0);
+        set_input(0.0);
+    }
+}
+
+void INTEGRAL_BLOCK::run(DYNAMIC_MODE mode)
+{
+    ostringstream osstream;
+    double t = get_T_in_s();
+    if(fabs(t)>DOUBLE_EPSILON and fabs(t-INFINITE_THRESHOLD)>DOUBLE_EPSILON)
+    {
+        if(mode==DYNAMIC_INTEGRATE_MODE)
+            integrate();
+        if(mode==DYNAMIC_UPDATE_MODE)
+            update();
+        if(mode==DYNAMIC_UPDATE_TIME_STEP_MODE)
+            update_simulation_time_step();
+    }
+}
+
+void INTEGRAL_BLOCK::integrate()
+{
+    double t = get_T_in_s();
+    if(fabs(t)>DOUBLE_EPSILON and fabs(t-INFINITE_THRESHOLD)>DOUBLE_EPSILON)
+    {
+        double x = get_input();
+
+        //double ds = x/t;
+        //double ds = x*one_over_t;
+
+        //if(fabs(ds)>DOUBLE_EPSILON)
+        //{
+            double s, z, y;
+
+            z = get_store();
+            //s = z + 0.5*h/t*x;
+            s = z + 0.5*h_over_t*x;
+            y = s;
+
+            switch(get_limiter_type())
+            {
+                case WINDUP_LIMITER:
+                {
+                    double vmax = get_upper_limit();
+                    double vmin = get_lower_limit();
+                    if(y>vmax)
+                        y = vmax;
+                    else
+                    {
+                        if(y<vmin)
+                            y = vmin;
+                    }
+                    break;
+                }
+                case NON_WINDUP_LIMITER:
+                {
+                    double vmax = get_upper_limit();
+                    double vmin = get_lower_limit();
+                    if(s>vmax)
+                    {
+                        s = vmax;
+                        y = vmax;
+                    }
+                    else
+                    {
+                        if(y<vmin)
+                        {
+                            s = vmin;
+                            y = vmin;
+                        }
+                    }
+                    break;
+                }
+                case NO_LIMITER:
+                default:
+                    break;
+            }
+            set_state(s);
+            set_output(y);
+        //}
+        //if(fabs(ds)>DSTATE_THRESHOLD)
+        //    cout<<"Derivative of state is changed dramatically in INTEGRAL_BLOCK\n";
+    }
+}
+
+void INTEGRAL_BLOCK::update()
+{
+    double t = get_T_in_s();
+    if(fabs(t)>DOUBLE_EPSILON and fabs(t-INFINITE_THRESHOLD)>DOUBLE_EPSILON)
+    {
+        double x = get_input();
+
+        double s, z, ds, y;
+
+        //ds = x/t;
+        ds = x*one_over_t;
+        s = get_state();
+        y = s;
+
+        switch(get_limiter_type())
+        {
+            case WINDUP_LIMITER:
+            {
+                double vmax = get_upper_limit();
+                double vmin = get_lower_limit();
+                if(y>vmax)
+                    y = vmax;
+                else
+                {
+                    if(y<vmin)
+                        y = vmin;
+                }
+                break;
+            }
+            case NON_WINDUP_LIMITER:
+            {
+                double vmax = get_upper_limit();
+                double vmin = get_lower_limit();
+                if(s>=vmax and ds>0.0)
+                {
+                    y = vmax;
+                    ds = 0.0;
+                }
+                else
+                {
+                    if(s<=vmin and ds<0.0)
+                    {
+                        y = vmin;
+                        ds = 0.0;
+                    }
+                }
+                break;
+            }
+            case NO_LIMITER:
+            default:
+                break;
+        }
+        //z = s+0.5*h/t*x;
+        z = s+0.5*h_over_t*x;
+        set_store(z);
+        set_output(y);
+    }
+}
+
+void INTEGRAL_BLOCK::update_simulation_time_step()
+{
+    double t = get_T_in_s();
+    if(fabs(t)>DOUBLE_EPSILON and fabs(t-INFINITE_THRESHOLD)>DOUBLE_EPSILON)
+    {
+        iSTEPS& toolkit = get_toolkit();
+        double h = toolkit.get_dynamic_simulation_time_step_in_s();
+        h_over_t = h*one_over_t;
+
+        double x = get_input();
+        double s = get_state();
+        double z = s+0.5*h_over_t*x;
+
+        set_store(z);
+    }
+}
+
+STEPS_SPARSE_MATRIX INTEGRAL_BLOCK::get_linearized_matrix_variable(char var) const
+{
+    var = toupper(var);
+    switch(var)
+    {
+        case 'A':
+            return get_linearized_matrix_A();
+        case 'B':
+            return get_linearized_matrix_B();
+        case 'C':
+            return get_linearized_matrix_C();
+        case 'D':
+            return get_linearized_matrix_D();
+        default:
+            STEPS_SPARSE_MATRIX matrix;
+            return matrix;
+    }
+}
+
+STEPS_SPARSE_MATRIX INTEGRAL_BLOCK::get_linearized_matrix_A() const
+{
+    /*
+    x: state; u: input; y: output
+    dx/dt = A*x + B*u
+    y     = C*x + D*u
+    */
+    STEPS_SPARSE_MATRIX matrix;
+
+    double a = 0.0;
+
+    matrix.add_entry(0,0, a);
+    matrix.compress_and_merge_duplicate_entries();
+
+    return matrix;
+}
+
+STEPS_SPARSE_MATRIX INTEGRAL_BLOCK::get_linearized_matrix_B() const
+{
+    STEPS_SPARSE_MATRIX matrix;
+
+    double b = 1/get_T_in_s();
+
+    matrix.add_entry(0,0, b);
+    matrix.compress_and_merge_duplicate_entries();
+
+    return matrix;
+}
+
+STEPS_SPARSE_MATRIX INTEGRAL_BLOCK::get_linearized_matrix_C() const
+{
+    STEPS_SPARSE_MATRIX matrix;
+
+    double c = 1.0;
+
+    matrix.add_entry(0,0, c);
+    matrix.compress_and_merge_duplicate_entries();
+
+    return matrix;
+}
+
+STEPS_SPARSE_MATRIX INTEGRAL_BLOCK::get_linearized_matrix_D() const
+{
+    STEPS_SPARSE_MATRIX matrix;
+
+    double d = 0.0;
+
+    matrix.add_entry(0,0, d);
+    matrix.compress_and_merge_duplicate_entries();
+
+    return matrix;
+}
+
+void INTEGRAL_BLOCK::check()
+{
+    check_limiter();
+}

@@ -1,0 +1,158 @@
+#ifndef BUS_H
+#define BUS_H
+
+#include "header/device/device.h"
+#include "header/basic/area.h"
+#include "header/basic/zone.h"
+#include "header/basic/owner.h"
+#include "header/basic/steps_enum.h"
+#include "header/basic/fault.h"
+
+#include "header/model/bus_model/bus_frequency_model.h"
+
+#include <string>
+#include <complex>
+#include <map>
+
+using namespace std;
+
+class PF_DATA;
+
+class BUS : public DEVICE
+{
+    public:
+        BUS(iSTEPS& toolkit);
+        BUS(const BUS& bus);
+        virtual ~BUS();
+
+        void set_bus_number(size_t number);
+        void set_bus_name(string name);
+        void set_base_voltage_in_kV(double voltage);
+        void set_bus_type(BUS_TYPE type);
+        void set_area_number(size_t number);
+        void set_zone_number(size_t number);
+        void set_owner_number(size_t number);
+        void set_positive_sequence_voltage_in_pu(double voltage);
+        void set_positive_sequence_voltage_in_kV(double voltage);
+        void set_positive_sequence_angle_in_rad(double angle, complex<double> euler=0.0);
+        void set_positive_sequence_angle_in_deg(double angle);
+        void set_negative_sequence_voltage_in_pu(double voltage);
+        void set_negative_sequence_voltage_in_kV(double voltage);
+        void set_negative_sequence_angle_in_rad(double angle, complex<double> euler=0.0);
+        void set_negative_sequence_angle_in_deg(double angle);
+        void set_zero_sequence_voltage_in_pu(double voltage);
+        void set_zero_sequence_voltage_in_kV(double voltage);
+        void set_zero_sequence_angle_in_rad(double angle, complex<double> euler=0.0);
+        void set_zero_sequence_angle_in_deg(double angle);
+        void set_normal_voltage_upper_limit_in_pu(double voltage);
+        void set_normal_voltage_lower_limit_in_pu(double voltage);
+        void set_emergency_voltage_upper_limit_in_pu(double voltage);
+        void set_emergency_voltage_lower_limit_in_pu(double voltage);
+        void set_voltage_upper_limit_in_pu(double voltage);
+        void set_voltage_lower_limit_in_pu(double voltage);
+        void set_base_frequency_in_Hz(double fn);
+        void set_voltage_to_regulate_in_pu(double voltage);
+
+        size_t get_bus_number() const;
+        string get_bus_name() const;
+        double get_base_voltage_in_kV() const;
+        BUS_TYPE get_bus_type() const;
+        size_t get_area_number() const;
+        size_t get_zone_number() const;
+        size_t get_owner_number() const;
+        double get_positive_sequence_voltage_in_pu() const;
+        double get_positive_sequence_voltage_in_kV() const;
+        double get_positive_sequence_angle_in_rad() const;
+        double get_positive_sequence_angle_in_deg() const;
+        double get_negative_sequence_voltage_in_pu() const;
+        double get_negative_sequence_voltage_in_kV() const;
+        double get_negative_sequence_angle_in_rad() const;
+        double get_negative_sequence_angle_in_deg() const;
+        double get_zero_sequence_voltage_in_pu() const;
+        double get_zero_sequence_voltage_in_kV() const;
+        double get_zero_sequence_angle_in_rad() const;
+        double get_zero_sequence_angle_in_deg() const;
+        double get_normal_voltage_upper_limit_in_pu() const;
+        double get_normal_voltage_lower_limit_in_pu() const;
+        double get_emergency_voltage_upper_limit_in_pu() const;
+        double get_emergency_voltage_lower_limit_in_pu() const;
+        double get_voltage_upper_limit_in_pu() const;
+        double get_voltage_lower_limit_in_pu() const;
+        double get_base_frequency_in_Hz() const;
+        double get_base_period_in_s() const;
+        double get_voltage_to_regulate_in_pu() const;
+        complex<double> get_positive_sequence_complex_voltage_in_pu() const;
+        complex<double> get_positive_sequence_complex_voltage_in_kV() const;
+        complex<double> get_negative_sequence_complex_voltage_in_pu() const;
+        complex<double> get_negative_sequence_complex_voltage_in_kV() const;
+        complex<double> get_zero_sequence_complex_voltage_in_pu() const;
+        complex<double> get_zero_sequence_complex_voltage_in_kV() const;
+
+        void set_equivalent_bus_number(size_t number);
+        size_t get_equivalent_bus_number() const;
+
+        bool is_bus_overshadowed() const;
+
+
+        virtual bool is_valid() const;
+        virtual void check()const;
+        virtual void clear();
+        virtual bool is_in_area(size_t area) const;
+        virtual bool is_in_zone(size_t zone) const;
+        virtual void report() const;
+
+        bool operator<(const BUS& bus) const;
+        BUS& operator=(const BUS& bus);
+
+        virtual DEVICE_ID get_device_id() const;
+        //virtual string get_compound_device_name() const;
+
+        void set_fault(const FAULT& fault);
+        FAULT get_fault() const;
+        void clear_fault();
+        bool is_faulted() const;
+
+        BUS_FREQUENCY_MODEL* get_bus_frequency_model();
+        void set_frequency_deviation_in_pu(double f);
+        double get_frequency_deviation_in_pu() const;
+        double get_frequency_deviation_in_Hz() const;
+        double get_frequency_in_pu() const;
+        double get_frequency_in_Hz() const;
+    private:
+        size_t bus_number;
+        size_t bus_name_index;
+        double base_voltage_in_kV;
+        double freq_rated, tn_s;;
+        BUS_TYPE bus_type;
+        size_t area_number;
+        size_t zone_number;
+        size_t owner_number;
+
+        double positive_sequence_voltage_in_pu;
+        double positive_sequence_angle_in_rad;
+        double negative_sequence_voltage_in_pu;
+        double negative_sequence_angle_in_rad;
+        double zero_sequence_voltage_in_pu;
+        double zero_sequence_angle_in_rad;
+
+        complex<double> positive_sequence_Euler_complex_number;
+        complex<double> negative_sequence_Euler_complex_number;
+        complex<double> zero_sequence_Euler_complex_number;
+
+        double normal_voltage_upper_limit_in_pu;
+        double normal_voltage_lower_limit_in_pu;
+        double emergency_voltage_upper_limit_in_pu;
+        double emergency_voltage_lower_limit_in_pu;
+
+        double voltage_to_regulate_in_pu;
+
+        size_t equivalent_bus_number;
+
+        BUS_FREQUENCY_MODEL bus_frequency_model;
+
+        FAULT fault;
+    private:
+        void copy_from_const_bus(const BUS& bus);
+};
+
+#endif // BUS_H

@@ -1,0 +1,13 @@
+#ifndef VERSION_H
+#define VERSION_H
+
+namespace libisteps {
+namespace version {
+    constexpr int major = @VERSION_MAJOR@;
+    constexpr int minor = @VERSION_MINOR@;
+    constexpr int patch = @VERSION_PATCH@;
+    constexpr const char* str = "@VERSION_STRING@";
+}
+}
+
+#endif // VERSION_H
