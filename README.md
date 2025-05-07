@@ -1,8 +1,8 @@
-# Intelligent and ingenious STEPS(iSTEPS)
+# Ingenious Simulation Toolkit for Electrical Power Systems (iSTEPS)
 
 The Ingenious Simulation Toolkit for Electrical Power Systems (iSTEPS) is an open-source power system simulator tailored for balanced large-scale AC-DC hybrid power system analysis. iSTEPS is an independent branch derived from STEPS(https://gitee.com/lichgang/steps/ and https://github.com/changgang/steps), with no intention of merging back into the main repository. 
 
-The major system restructuring and improvements from STEPS aiming to include:
+It aims to make major system restructuring and improvements from STEPS, include:
 
 - Flattening function call hierarchies
 - Streamlining code (utilizing templates to aggregate similar code)
@@ -15,7 +15,7 @@ It provides support for:
 - Short circuit analysis
 - Eigenvalue analysis
 - Electromechanical transient simulation
-- Stability optimization control
+- Stability quantification assessment and optimal control
 
 The data format in iSTEPS is an enhanced version based on the PSS/E raw, seq, and dyr data formats, improving compatibility and usability.
 
@@ -27,4 +27,3 @@ Additionally, some API function names will be simplified, adhering to a "five-wo
 
 # Dependency
 STEPS depends on CSparse, CXSparse, and nlohmann/Json. 
-The CXSparse is modified to avoid confliction between CSparse and CXSparse by changing prefix cs_ and CS_ to cxs_ and CSX_ .
